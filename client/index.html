@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat-Sergio</title>
+    <script type="module">
+
+        import { io } from 'https://cdn.socket.io/4.3.2/socket.io.esm.min.js'
+
+                const socket = io({
+            auth: {
+                serverOffset: 0
+            }
+        })
+
+        const form = document.getElementById('form')
+        const input = document.getElementById('input')
+        const messages = document.getElementById('messages')
+
+        //DISPLAY DE MENSAJES
+        socket.on('chat message', (msg, serverOffset) => {
+            const item = `<li>${msg}</li>`
+            messages.insertAdjacentHTML('beforeend', item)
+
+            //CUANADO EL USUARIO RETOMA CONEXIÓN, PERMITE ACTUALIZAR MENSAJES
+            socket.auth.serverOffset = serverOffset
+            messages.scrollTop = messages.scrollHeight
+        })
+
+        //AL PULSAR ENVIAR, SI HAY MENSAJE EN EL INPUT, ALMACENA EL VALOR
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            if (input.value) {
+                socket.emit('chat message', input.value)
+                input.value = ''
+            }
+        })
+
+
+        //BOTON DE VACIAR CHAT
+        document.getElementById('borrador').addEventListener('click',(e)=>{
+            socket.emit('vaciar tabla')
+            const prueba= document.querySelectorAll('li')
+
+            if(prueba.length==0){
+                console.log('Esta vacío')
+            }else{
+                prueba.forEach(e => e.remove())
+            }
+        })
+
+
+    </script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+        :root {
+            color-scheme: light dark;
+        }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            display: grid;
+            place-content: center;
+            height: 100vh;
+            padding: 30px;
+            grid-template-rows: 1fr;
+        }
+        #messages {
+            list-style-type: none;
+            margin: 0;
+            padding: 10px;
+            overflow-y: scroll;
+            height: 100%;
+            scroll-behavior: smooth;
+            padding-bottom: 48px;
+        }
+        #messages>li {
+            background: rgb(75, 73, 73);
+            padding: .5rem 1rem;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            box-shadow: 2px 2px 10px rgb(158, 157, 157);
+            text-align: right;
+        }
+        #messages>li:nth-child(odd) {
+            background: #026b0b;
+            text-align: left;
+        }
+        #chat {
+            background: rgb(83, 83, 83);
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            width: 350px;
+            height: 100%;
+            position: relative;
+            box-shadow: 2px 2px 25px rgb(185, 185, 185);
+        }
+
+        #form {
+            bottom: 0;
+            display: flex;
+            height: 48px;
+            left: 0;
+            padding: 4px;
+            position: absolute;
+            right: 0;
+        }
+
+        #input {
+            border-radius: 9999px;
+            border: 1px solid #eee;
+            flex: 1;
+            margin: 4px;
+            padding: 0 8px;
+            background: white;
+            color: black;
+        }
+
+        #input:focus {
+            outline: 0;
+        }
+
+        #borrador {
+            background: red;
+            color: white;
+            border-radius: 9999px;
+            padding: 5px;
+            font-size: 10px;
+            text-align: center;
+            position: relative;
+            margin: 4px;
+            width: 90%;
+            max-width: 100%;
+            text-decoration: none;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        #form>button {
+            background-color: rgb(7, 146, 7);
+            border-radius: 25px;
+            border: 0;
+            margin: 4 px;
+            padding: 0 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="chat">
+        <button id="borrador">BORRAR CHAT</button>
+        <ul id="messages"></ul>
+        <form id="form">
+
+            <input type="text" name="message" id="input" placeholder="Escribe aquí..." autocomplete="off" />
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+</body>
+
+</html>
