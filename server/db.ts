@@ -4,7 +4,7 @@ sqlite3.verbose();
 //abrimos la base
 const db = new sqlite3.Database('./db_messages.db', (err) =>{
     if (err) {
-        console.errror('Error al abrir la BD: ', err.message);
+        console.error('Error al abrir la BD: ')
     }else {
         console.log('Conectado a la BD');
     }
