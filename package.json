@@ -4,6 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build":"tsc",
+    "start":"node ./server/index.js",
+    "build-and-start":"npm run build && npm start",
     "dev": "node --watch ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,10 +20,12 @@
     "express": "^4.21.0",
     "morgan": "1.10.0",
     "socket.io": "^4.8.0",
+    "socket.io-client": "^4.8.0",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "@types/morgan": "^1.9.9"
+    "@types/morgan": "^1.9.9",
+    "@types/socket.io-client": "^3.0.0"
   }
 }

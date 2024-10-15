@@ -10,7 +10,7 @@ body {
     grid-template-rows: 1fr;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
-#pie1, #pie2{
+#footer{
 
     backdrop-filter: blur(20px);
     width: 100%;
@@ -19,11 +19,10 @@ body {
     position:absolute;
     bottom:0
 }
-#pie1>p, #pie2>p{
+#footer>p{
     margin-right: 2%;
 }
 
-/*ANIMACIONES*/
 @keyframes mov{
     from{
         scale:1;
@@ -36,59 +35,7 @@ body {
     }
 }
 
-/*PAGINA INICIO*/
-#welcome-screen{
-    display:flex;
-    flex-direction:column;
-    justify-content: center;
-    background: transparent;
-    backdrop-filter: blur(10px);
-    border-radius: 50px;
-    color:white;
-    text-align: center;
-    width:1000px;
-    height: 400px;
-    position: relative;
-    box-shadow:1px 1px 40px rgb(1, 1, 1);
-}
-#max-mensj{
-    border-radius: 50px;
-    padding: 15px;
-    margin-left: 20%;
-    margin-right: 20%;
-    color:white;
-    animation-duration:2s;
-    animation-name: mov;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-#mini-mensj{   
-    opacity: 70%;
-    color: lightgrey;
-}
-#enter-chat{
-    border-radius: 50px;
-    margin-top: 5%;
-    margin-left: 40%;
-    margin-right: 40%;
-    background-color: #6f00ff;
-    color:white;
-    font-size: larger;
-    box-shadow:1px 1px 20px rgb(255, 255, 255); 
-    transition-duration: 400ms;
-    border: none;
-}
-#enter-chat:hover{
-    scale:2;
-    background-color: black;
-    color:white;
-    box-shadow:1px 1px 20px #6f00ff; 
-}
-
-
-/*PAGINA CHAT */
-
-/*OPCION DE VOLVER*/
+/**/
 #return-block{
     flex:0,5;
     border-radius: 10px;
@@ -146,7 +93,7 @@ body {
     box-shadow:1px 1px 30px rgb(255, 255, 255);
     padding:20px
 }
-#borrador {
+#delete-button {
     background: red;
     color: white;
     border-radius: 9999px;
@@ -158,13 +105,13 @@ body {
     transition-duration: 400ms;
     z-index: 99999999;
 }
-#borrador:hover{
+#delete-button:hover{
     background-color: black;
     color: red;
     scale:1.008;/* CONFIGURADO POR ESTÉTICA PARA NO TOCAR EL BORDE*/
     box-shadow: 0 0 20px red;
 }
-#messages {
+#chat>ul {
     scrollbar-width: none;
     list-style-type: none;
     margin: 0;
@@ -173,7 +120,7 @@ body {
     height: 100%;
     padding-bottom: 48px;
 }
-#messages>li {
+#chat>ul>li {
     background: rgba(125, 124, 124, 0.506);
     color:white;
     padding: .5rem 1rem;
@@ -182,12 +129,12 @@ body {
     box-shadow:0px 0px 5px rgb(255, 255, 255);
     text-align: right;
 }
-#messages>li:nth-child(odd) {
+#chat>ul>li:nth-child(odd) {
     background: #00fd1581;
     color:white;
     text-align: left;
 }
-#form {
+#chat>form {
     bottom: 0;
     display: flex;
     height: 48px;
@@ -196,7 +143,7 @@ body {
     position: absolute;
     right: 0;
 }
-#input {
+#chat>form>input{
     display:grid;
     border-radius: 9999px;
     border: 1px solid #eee;
@@ -206,10 +153,10 @@ body {
     background: white;
     color: black;
 }
-#input:focus {
+#chat>form>input:focus{
     outline: 0;
 }
-#form>button {
+#chat>form>button{
     background-color: rgb(7, 146, 7);
     color: white;
     border-radius: 25px;
@@ -218,7 +165,7 @@ body {
     padding: 0 8px;
     transition-duration: 400ms;
 }
-#form>button:hover{
+#chat>form>button:hover{
     box-shadow: 0 0 20px white;
 }
 *,

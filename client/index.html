@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles-html.css">
     <title>Chat-Sergio</title>
 </head>
 <body>
     <div id="welcome-screen">
-        <h1 id="max-mensj">Bienvenido/a</h1>
-        <p id="mini-mensj">HV-PC-2</p>
+        <h1 id="max-mes">Bienvenido/a</h1>
+        <p id="mini-mes">HV-PC-2</p>
         <button id="enter-chat">Entrar al Chat</button>
     </div>
-
-    <script>
-        //ACCEDER AL CHAT
-        document.getElementById('enter-chat').addEventListener('click', function() {
-            window.location.href = 'post-index.html';
-        });
-    </script>
-    <footer id="pie1">
+    <script type="module" src="script/script.js" async></script>
+    <footer id="footer">
         <p>Desarrollado por <strong>Sergio Cerrillo</strong> © 2024</p>
     </footer>
 </body>
