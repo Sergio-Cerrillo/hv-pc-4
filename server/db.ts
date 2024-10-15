@@ -1,7 +1,7 @@
 import sqlite3 from 'sqlite3';
 sqlite3.verbose();
 
-//abrimos la base
+//open database
 const db = new sqlite3.Database('./db_messages.db', (err) =>{
     if (err) {
         console.error('Error al abrir la BD: ')
@@ -10,5 +10,5 @@ const db = new sqlite3.Database('./db_messages.db', (err) =>{
     }
 })
 
-//exportamos la conexion
+//export connection
 export default db;

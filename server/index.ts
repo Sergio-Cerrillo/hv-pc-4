@@ -1,3 +1,4 @@
+
 import express from 'express';
 import path from 'path';
 import logger from 'morgan';
@@ -16,15 +17,21 @@ dotenv.config();
 const port: number = parseInt(process.env.PORT ?? '3000', 10); 
 const app = express();
 
-//PODER ACCEDER A CSS
-app.use(express.static(path.join(__dirname, '../client'))); 
+app.use(logger('dev')); 
 
-//INICIAMOS EL SERVER
+//css
+app.use(express.static(path.join(__dirname, '../../client'))); 
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/index.html'));
+});
+
+//run server
 const server = createServer(app);
 const io = new Server(server);
 
 
-//FORZAMOS LA TABLA
+//force table
 await db.run(`
     CREATE TABLE IF NOT EXISTS messages(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,8 +39,8 @@ await db.run(`
     )
 `);
 
-// FUNCION PARA OBTENER MENSAJES
-async function obtenerMensajes(): Promise<{ id: number; content: string }[]> {
+// function to obtain messages
+async function obtainMessages(): Promise<{ id: number; content: string }[]> {
     return new Promise((resolve, reject) => {
         db.all('SELECT * FROM messages', [], (err: Error | null, rows: { id: number; content: string }[]) => {
             if (err) {
@@ -45,19 +52,19 @@ async function obtenerMensajes(): Promise<{ id: number; content: string }[]> {
     });
 }
 
-//CONEXION EXITOSA
+//successful connection
 io.on('connection', async (socket: Socket) => {
     console.log('Usuario conectado');
 
     try {
-        const mensajes = await obtenerMensajes(); //OBTENEMOS SI HAY MENSAJES
+        const mensajes = await obtainMessages(); //check if there are messages
         mensajes.forEach(row => {
             socket.emit('chat message', row.content); 
         });
-    } catch (error) { //SI NO PUDIESE ACCEDER, COMPROBAMOS EL ERROR
+    } catch (error) { //check the error if we cant acces
         console.error('Error al obtener los mensajes: ', (error as Error).message);
     }
-//DESCONEXION EXITOSA
+//successful disconnection
 socket.on('disconnect', () => {
     console.log('Usuario desconectado');
 });
@@ -78,12 +85,12 @@ socket.on('chat message', async (msg: string) => {
         io.emit('chat message', msg);
     });
 
-// BOTON BORRAR PARA VACÍO DE CHAT
+// button to clean chat
 socket.on('vaciar tabla', async () => {
         try {
             await db.run('DELETE FROM messages');
                 console.log('Mensajes eliminados correctamente');
-            const mensajes = await obtenerMensajes();
+            const mensajes = await obtainMessages();
                 if (mensajes.length) {
                 io.emit('chat message', mensajes);
                 }
@@ -92,7 +99,7 @@ socket.on('vaciar tabla', async () => {
         }
     });
 
-if (!socket.recovered) { // RECUPERADORES
+if (!socket.recovered) { // recuperator
     try {
         const results = await db.all(
             'SELECT id, content FROM messages WHERE id > ?',
@@ -109,7 +116,7 @@ if (!socket.recovered) { // RECUPERADORES
     }
 });
 
-app.use(logger('dev')); 
+
 
 server.listen(port, () => {
     console.log(`CHAT USANDO EL PUERTO: ${port}`);
