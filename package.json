@@ -4,10 +4,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build":"tsc",
-    "start":"node ./server/index.js",
-    "build-and-start":"npm run build && npm start",
-    "dev": "node --watch ./server/index.js",
+    "build": "tsc",
+    "start": "node ./dist/server/index.js",
+    "build-and-start": "npm run build && cp -R ./client/css ./dist/client/css && cp ./client/*.html ./dist/client && npm run start",
+    "dev": "node --watch ./dist/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
