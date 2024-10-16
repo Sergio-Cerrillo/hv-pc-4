@@ -10,7 +10,7 @@ body {
     grid-template-rows: 1fr;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
-#footer{
+.footer{
 
     backdrop-filter: blur(20px);
     width: 100%;
@@ -19,7 +19,7 @@ body {
     position:absolute;
     bottom:0
 }
-#footer>p{
+.footer>p{
     margin-right: 2%;
 }
 
@@ -35,8 +35,7 @@ body {
     }
 }
 
-/**/
-#return-block{
+.return-block{
     flex:0,5;
     border-radius: 10px;
     background: transparent;
@@ -53,7 +52,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-#return-block>h2{
+.return-block>h2{
     color: white;
     text-align: center;
     justify-content: center;
@@ -62,7 +61,7 @@ body {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
-#return-block>button{
+.return-block>button{
     border-radius: 999px;
     width:70%;
     display: block;
@@ -73,7 +72,7 @@ body {
     box-shadow:1px 1px 20px rgb(255, 255, 255);  
     transition-duration: 400ms;
 }
-#return-block>button:hover{
+.return-block>button:hover{
     scale:1.3;
     background-color: black;
     box-shadow:1px 1px 50px #6f00ff;
@@ -81,7 +80,7 @@ body {
 }
 
 /*CHAT*/
-#chat {
+.chat {
     flex:1;
     background: transparent;
     backdrop-filter: blur(10px);
@@ -93,7 +92,7 @@ body {
     box-shadow:1px 1px 30px rgb(255, 255, 255);
     padding:20px
 }
-#delete-button {
+.delete-button {
     background: red;
     color: white;
     border-radius: 9999px;
@@ -105,13 +104,13 @@ body {
     transition-duration: 400ms;
     z-index: 99999999;
 }
-#delete-button:hover{
+.delete-button:hover{
     background-color: black;
     color: red;
     scale:1.008;/* CONFIGURADO POR ESTÉTICA PARA NO TOCAR EL BORDE*/
     box-shadow: 0 0 20px red;
 }
-#chat>ul {
+.chat>ul{
     scrollbar-width: none;
     list-style-type: none;
     margin: 0;
@@ -120,7 +119,7 @@ body {
     height: 100%;
     padding-bottom: 48px;
 }
-#chat>ul>li {
+.chat>ul>li {
     background: rgba(125, 124, 124, 0.506);
     color:white;
     padding: .5rem 1rem;
@@ -129,12 +128,12 @@ body {
     box-shadow:0px 0px 5px rgb(255, 255, 255);
     text-align: right;
 }
-#chat>ul>li:nth-child(odd) {
+.chat>ul>li:nth-child(odd) {
     background: #00fd1581;
     color:white;
     text-align: left;
 }
-#chat>form {
+.chat>form {
     bottom: 0;
     display: flex;
     height: 48px;
@@ -143,7 +142,7 @@ body {
     position: absolute;
     right: 0;
 }
-#chat>form>input{
+.chat>form>input{
     display:grid;
     border-radius: 9999px;
     border: 1px solid #eee;
@@ -153,10 +152,10 @@ body {
     background: white;
     color: black;
 }
-#chat>form>input:focus{
+.chat>form>input:focus{
     outline: 0;
 }
-#chat>form>button{
+.chat>form>button{
     background-color: rgb(7, 146, 7);
     color: white;
     border-radius: 25px;
@@ -165,7 +164,7 @@ body {
     padding: 0 8px;
     transition-duration: 400ms;
 }
-#chat>form>button:hover{
+.chat>form>button:hover{
     box-shadow: 0 0 20px white;
 }
 *,
