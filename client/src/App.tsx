@@ -1,10 +1,9 @@
 import React from 'react';
-import { ReactDOM } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Welcome from './components/Welcome'
-import Chat from './components/Chat';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {Welcome} from './components/Welcome';
+import {Chat} from './components/Chat';
 
-const App: React.FC = () => {
+ export const App: React.FC = () => {
   return (
     <Router>
       <Routes>
@@ -15,4 +14,3 @@ const App: React.FC = () => {
   );
 };
 
-export default App;

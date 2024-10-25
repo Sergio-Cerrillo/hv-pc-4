@@ -3,13 +3,14 @@ import { ReactDOM } from 'react';
 import { io } from 'socket.io-client';
 import './chat.css'; 
 
+export const Chat: React.FC = () => {
 const socket = io('http://localhost:3000', {
   auth: {
     serverOffset: 0,
   },
 });
 
-const Chat: React.FC = () => {
+
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLUListElement>(null);
@@ -83,4 +84,3 @@ const Chat: React.FC = () => {
   );
 };
 
-export default Chat;

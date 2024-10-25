@@ -1,13 +1,13 @@
 import React from 'react';
 import { ReactDOM } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './welcome.css'; // Asegúrate de que la ruta sea correcta
+import './welcome.css'; 
 
-const Welcome: React.FC = () => {
+export const Welcome: React.FC = () => {
   const navigate = useNavigate();
 
   const handleEnterChat = () => {
-    navigate('/chat'); // Redirige al chat
+    navigate('/chat'); 
   };
 
   return (
@@ -24,4 +24,3 @@ const Welcome: React.FC = () => {
   );
 };
 
-export default Welcome;
