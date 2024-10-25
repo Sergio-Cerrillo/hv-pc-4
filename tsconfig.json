@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-
+    "jsx":"react-jsx",
     "outDir":"./dist",
     "rootDir":"./",
     "target": "ESNext",
@@ -16,8 +16,7 @@
   },
   "include": [
     "client/**/*",
-    "server/**/*" ,
-    "client/html/**/*"
+    "server/**/*" 
 , ],
   "exclude": [
     "node_modules" 

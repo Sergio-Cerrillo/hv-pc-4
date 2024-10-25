@@ -17,13 +17,28 @@ const app = express();
 app.use(logger("dev"));
 
 //css
-app.use(express.static(path.join(__dirname, "../client")));
+app.use(express.static(path.join(__dirname, "../client/css")));
 
 app.use("/dist", express.static(path.join(__dirname, "../dist/client")));
+
+app.use("/src", express.static(path.join(__dirname, "../dist/client/src")));
+
+app.use(express.static(path.join(__dirname, "../client/src")));
+
+app.use(express.static(path.join(__dirname, "../client/src/components")));
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/index.html"));
 });
+
+app.use(
+  "/src",
+  express.static(path.join(__dirname, "../dist/client/src"), {
+    setHeaders: (res, path) => {
+      console.log(`Sirviendo: ${path}`);
+    },
+  })
+);
 
 //run server
 const server = createServer(app);
