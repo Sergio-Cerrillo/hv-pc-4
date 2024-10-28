@@ -1,0 +1,119 @@
+body {
+    background-image:url("https://images.unsplash.com/photo-1687639160028-95d24c15d04d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zm9uZG9zJTIwZGUlMjBwYW50YWxsYSUyMGRlbCUyMG1vZG8lMjBvc2N1cm98ZW58MHx8MHx8fDA%3D");
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    place-content: center;
+    height: 100vh;
+    padding: 100px;
+    grid-template-rows: 1fr;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.footer{
+
+    backdrop-filter: blur(20px);
+    width: 100%;
+    text-align: right;
+    box-shadow:1px 1px 40px rgb(1, 1, 1);
+    position:absolute;
+    bottom:0
+}
+.footer>p{
+    margin-right: 2%;
+}
+
+
+/*CHAT*/
+.chat {
+    flex:1;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    width: 350px;
+    height: 90%;
+    position: relative;
+    box-shadow:1px 1px 30px rgb(255, 255, 255);
+    padding:20px
+}
+.delete-button {
+    background: red;
+    color: white;
+    border-radius: 9999px;
+    padding: 5px;
+    font-size: 10px;
+    margin-top: 5px;
+    margin-right: 10px;
+    min-width: 100%;
+    transition-duration: 400ms;
+    z-index: 99999999;
+}
+.delete-button:hover{
+    background-color: black;
+    color: red;
+    scale:1.008;/* CONFIGURADO POR ESTÉTICA PARA NO TOCAR EL BORDE*/
+    box-shadow: 0 0 20px red;
+}
+.chat>ul{
+    scrollbar-width: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    overflow-y: scroll;
+    height: 100%;
+    padding-bottom: 48px;
+}
+.chat>ul>li {
+    background: rgba(125, 124, 124, 0.506);
+    color:white;
+    padding: .5rem 1rem;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow:0px 0px 5px rgb(255, 255, 255);
+    text-align: right;
+}
+.chat>ul>li:nth-child(odd) {
+    background: #00fd1581;
+    color:white;
+    text-align: left;
+}
+.chat>form {
+    bottom: 0;
+    display: flex;
+    height: 48px;
+    left: 0;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+}
+.chat>form>input{
+    display:grid;
+    border-radius: 9999px;
+    border: 1px solid #eee;
+    flex: 1;
+    margin: 4px;
+    padding: 0 8px;
+    background: white;
+    color: black;
+}
+.chat>form>input:focus{
+    outline: 0;
+}
+.chat>form>button{
+    background-color: rgb(7, 146, 7);
+    color: white;
+    border-radius: 25px;
+    border: 0;
+    margin: 4 px;
+    padding: 0 8px;
+    transition-duration: 400ms;
+}
+.chat>form>button:hover{
+    box-shadow: 0 0 20px white;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}

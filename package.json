@@ -1,15 +1,16 @@
 {
-  "name": "proyectos",
+  "name": "mi-aplicacion-chat",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/src/index.js",
   "type": "module",
-  "scripts": {
-    "build": "tsc",
-    "start": "node ./dist/server/index.js",
-    "build-and-start": "npm run build && mkdir -p ./dist/client/css && cp -R ./client/css ./dist/client/css && mkdir -p ./dist/client && cp ./client/index.html ./dist/client && npm run start",
-    "dev": "node --watch ./dist/server/index.js",
+  
+ "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "copy": "cp -R ./public/*.html ./dist && cp -R ./src/chat.css ./dist/src",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -18,7 +19,7 @@
     "@libsql/client": "^0.14.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "morgan": "1.10.0",
+    "morgan": "^1.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
@@ -32,6 +33,10 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/socket.io-client": "^3.0.0",
-    "typescript": "^5.6.3"
+    "@vitejs/plugin-react": "^4.3.3",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
   }
 }
