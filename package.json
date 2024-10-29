@@ -1,14 +1,15 @@
 {
-  "name": "proyectos",
+  "name": "mi-aplicacion-chat",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/src/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node ./dist/server/index.js",
-    "build-and-start": "npm run build && cp -R ./client/css ./dist/client/css && cp ./client/*.html ./dist/client && npm run start",
-    "dev": "node --watch ./dist/server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "copy": "cp -R ./public/*.html ./dist && cp -R ./src/chat.css ./dist/src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"concurrently \"tsc && node ./dist/src/server.js\" \"vite\""
   },
   "keywords": [],
   "author": "",
@@ -16,9 +17,13 @@
   "description": "",
   "dependencies": {
     "@libsql/client": "^0.14.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "morgan": "1.10.0",
+    "morgan": "^1.10.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0",
     "socket.io": "^4.8.0",
     "socket.io-client": "^4.8.0",
     "sqlite3": "^5.1.7"
@@ -26,6 +31,14 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
-    "@types/socket.io-client": "^3.0.0"
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/socket.io-client": "^3.0.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
   }
 }

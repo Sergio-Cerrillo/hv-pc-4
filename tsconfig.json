@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-
+    "jsx":"react-jsx",
     "outDir":"./dist",
     "rootDir":"./",
     "target": "ESNext",
@@ -11,14 +11,16 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "typeRoots": [
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "./src/@types"
     ]
   },
   "include": [
-    "client/**/*",
-    "server/**/*" ,
-    "client/html/**/*"
-, ],
+    "server/**/*",
+    "server/db.ts", 
+    "src",
+    "src/**/*" ],
+    
   "exclude": [
     "node_modules" 
   ]
