@@ -10,5 +10,4 @@ const db = new sqlite3.Database("./db_messages.db", (err) => {
   }
 });
 
-//export connection
 export default db;

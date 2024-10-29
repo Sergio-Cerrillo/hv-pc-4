@@ -6,6 +6,8 @@ import { createServer } from "http";
 import dotenv from "dotenv";
 import db from "./db.js";
 import { fileURLToPath } from "url";
+import cors from "cors";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -23,13 +25,20 @@ app.use("/src", express.static(path.join(__dirname, "../dist/src")));
 
 app.get("/", (req, res) => {
   const filePath = path.join(__dirname, "../dist/index.html");
-  console.log("Buscando archivo en:", filePath); // Verificar la ruta
+  console.log("Buscando archivo en:", filePath); //used to verify
   res.sendFile(filePath);
 });
 
 //run server
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
+
+app.use(cors());
 
 //force table
 await db.run(`
@@ -75,6 +84,7 @@ io.on("connection", async (socket: Socket) => {
   });
 
   socket.on("chat message", async (msg: string) => {
+    console.log("Mensaje recibido en el servidor: ", msg);
     let result: any;
 
     try {

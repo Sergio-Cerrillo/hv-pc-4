@@ -1,80 +1,85 @@
-import { useEffect, useRef, useState } from 'react';
-import { io } from 'socket.io-client';
+import React, { useEffect, useRef } from 'react';
+import { io } from 'socket.io-client'
 
+const Chat: React.FC = () => {
+    const messagesRef = useRef<HTMLUListElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    
+    useEffect(() => {
+        const loadSocketIO = async () => {
+            const socket = io("http://localhost:3000", {
+                auth: {
+                    serverOffset: 0,
+                },
+            });
 
-export const Chat: React.FC = () => {
-const socket = io('http://localhost:3000', {
-  auth: {
-    serverOffset: 0,
-  },
-});
+            socket.on("connect", () => {
+                console.log("Conectado al socket");
+            });
 
+            //Show messages on chat
+            socket.on("chat message", (msg: string) => {
+                console.log("mensaje: ", msg);
+                if (messagesRef.current) {
+                    const item = document.createElement('li');
+                    item.textContent = msg;
+                    messagesRef.current.appendChild(item);
+                    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+                }
+            });
 
-  const [messages, setMessages] = useState<string[]>([]);
-  const [input, setInput] = useState('');
-  const messagesEndRef = useRef<HTMLUListElement>(null);
+            //Clean the chat
+            const deleteButtons = document.getElementsByClassName("delete-button");
+            for (let i = 0; i < deleteButtons.length; i++) {
+                deleteButtons[i].addEventListener("click", () => {
+                    socket.emit("vaciar tabla");
+                    const items = messagesRef.current?.children;
+                    if (!items || items.length === 0) {
+                        console.log("El chat ya está vacío.");
+                    } else {
+                        Array.from(items).forEach(item => item.remove());
+                    }
+                });
+            }
 
-  useEffect(() => {
-    // Escuchar los mensajes del servidor
-    socket.on('chat message', (msg: string) => {
-      setMessages((prevMessages) => [...prevMessages, msg]);
-      scrollToBottom();
-    });
+            //Send messages
+            const form = document.querySelector("form");
+            if (form && inputRef.current) {
+                form.addEventListener("submit", (e) => {
+                    e.preventDefault();
 
-    return () => {
-      socket.off('chat message');
-    };
-  }, []);
+                    if (inputRef.current && inputRef.current.value.trim()) {
+                        socket.emit("chat message", inputRef.current.value); // Send
+                        inputRef.current.value = ""; //Clean input after send
+                        console.log("Mensaje enviado y almacenado");
+                    } else {
+                        console.log("No se puede enviar un mensaje vacío.");
+                    }
+                });
+            } else {
+                console.error("El formulario o el campo de entrada no se encontraron.");
+            }
+        };
+        loadSocketIO();
+    }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (input.trim()) {
-      socket.emit('chat message', input);
-      setInput('');
-    } else {
-      console.log("No se puede enviar un mensaje vacío.");
-    }
-  };
-
-  const handleDelete = () => {
-    socket.emit('vaciar tabla');
-    setMessages([]); // Limpiar mensajes localmente
-  };
-
-  const scrollToBottom = () => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
-    }
-  };
-
-  return (
-    <div>
-      <section className="chat">
-        <button className="delete-button" onClick={handleDelete}>
-          BORRAR CHAT
-        </button>
-        <ul ref={messagesEndRef} className="messages" style={{ maxHeight: '300px', overflowY: 'auto' }}>
-          {messages.map((msg, index) => (
-            <li key={index}>{msg}</li>
-          ))}
-        </ul>
-        <form className="form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="input"
-            placeholder="Escribe aquí..."
-            autoComplete="off"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button type="submit">Enviar</button>
-        </form>
-      </section>
-      <footer className="footer">
-        <p>Desarrollado por <strong>Sergio Cerrillo</strong> © 2024</p>
-      </footer>
-    </div>
-  );
+    return (
+  <>
+            <section className='chat'>
+                    <button className="delete-button">BORRAR CHAT</button>
+                    <ul className="messages" ref={messagesRef}></ul>
+                <form className='form'>
+                    <input ref={inputRef} className="input" type="text" placeholder="Escribe tu mensaje" />
+                    <button type="submit">Enviar</button>
+                </form>
+            </section>
+           
+            <footer className='footer'>
+                <p>Desarrollado por <strong>Sergio Cerrillo</strong> © 2024</p>
+            </footer>
+    </>
+    
+    );
 };
 
 export default Chat;
