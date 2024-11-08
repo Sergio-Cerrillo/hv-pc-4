@@ -9,7 +9,7 @@
     "serve": "vite preview",
     "copy": "cp -R ./public/*.html ./dist && cp -R ./src/chat.css ./dist/src",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"concurrently \"tsc && node ./dist/src/server.js\" \"vite\""
+    "start": "concurrently \"tsc && node ./dist/src/server.js\" \"vite\""
   },
   "keywords": [],
   "author": "",
@@ -25,7 +25,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
     "socket.io": "^4.8.0",
-    "socket.io-client": "^4.8.0",
+    "socket.io-client": "^4.8.1",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {

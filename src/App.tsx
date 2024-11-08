@@ -1,10 +1,12 @@
-import Chat from './components/Chat'
+import Chat from './components/chat/Chat'
+import React from 'react';
+import { SocketProvider } from './components/layout/Layout';
 
-  const App = () => {
+  const App: React.FC = () => {
   return (
-    <div>
+    <SocketProvider>
       <Chat/>
-    </div>
+    </SocketProvider>
   );
 };
 export default App;
