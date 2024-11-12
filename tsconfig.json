@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "jsx":"react-jsx",
-    "outDir":"./dist",
-    "rootDir":"./",
+    "jsx": "preserve",
     "target": "ESNext",
     "module": "ESNext",
     "strict": true,
@@ -12,16 +10,34 @@
     "skipLibCheck": true,
     "typeRoots": [
       "./node_modules/@types",
-      "./src/@types"
-    ]
+      "app/@types"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "incremental": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "noEmit": false,
+    "outDir": "./dist",
+    "rootDir": "./",
   },
   "include": [
+    "app/src/**/*",
+    "app/**/*",
     "server/**/*",
-    "server/db.ts", 
-    "src",
-    "src/**/*" ],
-    
+    "server/db.ts",
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
-    "node_modules" 
+    "node_modules"
   ]
 }

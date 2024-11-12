@@ -1,15 +1,14 @@
 {
   "name": "mi-aplicacion-chat",
   "version": "1.0.0",
-  "main": "dist/src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
-    "copy": "cp -R ./public/*.html ./dist && cp -R ./src/chat.css ./dist/src",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"tsc && node ./dist/src/server.js\" \"vite\""
+    "dev": "next dev",                     
+    "build": "next build",                 
+    "start": "next start",                
+    "compile": "tsc",                      
+    "server": "node dist/app/src/server.js",       
+    "start-server": "concurrently \"npm run dev\" \"npm run compile && npm run server\""
   },
   "keywords": [],
   "author": "",
@@ -17,14 +16,16 @@
   "description": "",
   "dependencies": {
     "@libsql/client": "^0.14.0",
+    "@types/node": "^22.9.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "morgan": "^1.10.0",
+    "next": "^15.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
-    "socket.io": "^4.8.0",
+    "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "sqlite3": "^5.1.7"
   },
