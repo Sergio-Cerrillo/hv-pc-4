@@ -1,8 +1,9 @@
+"use client"
 import React from 'react';
 import InputField from '../ui/Input'; 
 import SendButton from '../ui/SendButton';   
 import DeleteButton from '../ui/DeleteButton';  
-import useChat from '../../hooks/useChat';  
+import useChat from '../hooks/useChat';  
 import Footer from '../ui/Footer';
 
 const Chat: React.FC = () => {
